@@ -9,12 +9,14 @@
  */
 angular.module('bitcoinViewApp')
   .controller('MainCtrl', function ($scope,$websocket) {
-  	
+
     $scope.dataTop4 = [];
     $scope.dataActual = {};
 
+
+
     var dataStream = $websocket('wss://api.bitfinex.com/ws/v2');
-	var msg = JSON.stringify({ 
+	var subscribeRequest = JSON.stringify({ 
 	  event: 'subscribe', 
 	  channel: 'ticker', 
 	  symbol: 'tBTCUSD' 
@@ -33,7 +35,7 @@ angular.module('bitcoinViewApp')
 		}
 	});
 	dataStream.onOpen(function() {
-	    dataStream.send(msg);
+	    dataStream.send(subscribeRequest);
 	});
 
 
