@@ -9,7 +9,8 @@
  */
 angular.module('bitcoinViewApp')
   .controller('MainCtrl', function ($scope,$websocket) {
-    $scope.data = [];
+  	
+    $scope.dataTop4 = [];
     $scope.dataActual = {};
 
     var dataStream = $websocket('wss://api.bitfinex.com/ws/v2');
@@ -22,8 +23,12 @@ angular.module('bitcoinViewApp')
 
 	dataStream.onMessage(function(message) {
 		var dataWs = JSON.parse(message.data);
+
 		if (dataWs[1] !== "hb") {
-	    	$scope.data.push(dataWs);
+			if ($scope.dataTop4.length === 4) {
+				$scope.dataTop4.shift();
+			}
+			$scope.dataTop4.push($scope.dataActual);
 	    	$scope.dataActual = dataWs;
 		}
 	});

@@ -1,13 +1,31 @@
 
   <h1>Bitcoin en tiempo real</h1>
     
-    <h5>Valores Actuales</h5>
-    <ul>
-      <li>BID : {{dataActual[1]}}</li>
-      <li>BID_SIZE : {{dataActual[2]}}</li>
-      <li>ASK : {{dataActual[3]}}</li>
-      <li>ASK_SIZE : {{dataActual[4]}}</li>
-    </ul>
+    <h2>Valores Actuales</h2>
+    <div class="col-md-12">
+      
+      <ul>
+        <li>BID : {{dataActual[1]}}</li>
+        <li>BID_SIZE : {{dataActual[2]}}</li>
+        <li>ASK : {{dataActual[3]}}</li>
+        <li>ASK_SIZE : {{dataActual[4]}}</li>
+      </ul>
+      <h3>Diferencia de precio {{getDiffPrice(dataActual) | currency}}</h3>
+      <h3>Diferencia de Cantidad {{getDiffSize(dataActual) | number}}</h3>
+    </div>
 
-    <h3>Diferencia de precio {{getDiffPrice(dataActual) | currency}}</h3>
-    <h3>Diferencia de Cantidad {{getDiffSize(dataActual) | number}}</h3>
+
+    
+    <h2>Ultimos 4 Valores</h2>
+    <div class="col-md-3" ng-repeat="ind in dataTop4">
+      <ul>
+        <li>BID : {{ind[1]}}</li>
+        <li>BID_SIZE : {{ind[2]}}</li>
+        <li>ASK : {{ind[3]}}</li>
+        <li>ASK_SIZE : {{ind[4]}}</li>
+      </ul>
+
+      <h4>Diferencia de precio {{getDiffPrice(ind) | currency}}</h4>
+      <h4>Diferencia de Cantidad {{getDiffSize(ind) | number}}</h4>
+      
+    </div>    
